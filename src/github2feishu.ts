@@ -22,9 +22,22 @@ export async function PostGithubEvent(): Promise<number | undefined> {
     ? core.getInput('signkey')
     : process.env.FEISHU_BOT_SIGNKEY || ''
 
-  const previewImg = core.getInput('preview_img')
-    ? core.getInput('preview_img')
-    : process.env.PREVIEW_IMG|| ''
+  const templateId = core.getInput('template_id')
+    ? core.getInput('template_id')
+    : process.env.TEMPLATE_ID || ''
+
+  let data = {}
+  try {
+     data = core.getInput('template_data')
+    ? core.getInput('template_data')
+    : process.env.TEMPLATE_DATA
+    data = data ? JSON.parse(data) : || {}
+  } catch(err) {
+    data = {}
+    console.log('get data err',err)
+  }
+  
+
 
   const payload = context.payload || {}
   console.log(payload)
@@ -181,7 +194,9 @@ export async function PostGithubEvent(): Promise<number | undefined> {
     status,
     etitle,
     detailurl,
-    previewImg
+    previewImg,
+    templateId,
+    data
   )
   return PostToFeishu(webhookId, cardmsg)
 }
