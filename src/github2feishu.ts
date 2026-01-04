@@ -26,18 +26,16 @@ export async function PostGithubEvent(): Promise<number | undefined> {
     ? core.getInput('template_id')
     : process.env.TEMPLATE_ID || ''
 
-  let data = {}
+  let data: any = {}
   try {
-     data = core.getInput('template_data')
-    ? core.getInput('template_data')
-    : process.env.TEMPLATE_DATA
-    data = data ? JSON.parse(data) : || {}
-  } catch(err) {
+    data = core.getInput('template_data')
+      ? core.getInput('template_data')
+      : process.env.TEMPLATE_DATA
+    data = data ? JSON.parse(data) : {}
+  } catch (err) {
     data = {}
-    console.log('get data err',err)
+    console.log('get data err', err)
   }
-  
-
 
   const payload = context.payload || {}
   console.log(payload)
