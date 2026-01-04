@@ -194,7 +194,6 @@ export async function PostGithubEvent(): Promise<number | undefined> {
     status,
     etitle,
     detailurl,
-    previewImg,
     templateId,
     data
   )
