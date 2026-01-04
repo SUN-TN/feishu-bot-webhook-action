@@ -22,6 +22,10 @@ export async function PostGithubEvent(): Promise<number | undefined> {
     ? core.getInput('signkey')
     : process.env.FEISHU_BOT_SIGNKEY || ''
 
+  const previewImg = core.getInput('preview_img')
+    ? core.getInput('preview_img')
+    : process.env.PREVIEW_IMG|| ''
+
   const payload = context.payload || {}
   console.log(payload)
 
@@ -176,7 +180,8 @@ export async function PostGithubEvent(): Promise<number | undefined> {
     actor,
     status,
     etitle,
-    detailurl
+    detailurl,
+    previewImg
   )
   return PostToFeishu(webhookId, cardmsg)
 }
