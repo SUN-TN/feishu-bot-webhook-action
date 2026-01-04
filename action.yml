@@ -11,6 +11,12 @@ inputs:
   signkey:
     description: 'set when you enable signature verify'
     required: false
+  template_id:  
+    description: 'card template id' 
+    required: true
+  template_data:  
+    description: 'card template data' 
+    required: false
 outputs:
   code:
     description: 'code from response'
