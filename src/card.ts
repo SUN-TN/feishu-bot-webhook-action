@@ -42,7 +42,10 @@ export function BuildGithubNotificationCard(
   user: string,
   status: string,
   etitle: string,
-  detailurl: string
+  detailurl: string,
+  templateId:string,
+  data:any;
+
 ): string {
   const ncard: CardMessage = {
     timestamp: `${tm}`,
@@ -51,8 +54,8 @@ export function BuildGithubNotificationCard(
     card: {
       type: 'template',
       data: {
-        template_id: 'AAqkeNyiypMLb',
-        template_version_name: '1.0.8',
+        template_id: templateId,
+        // template_version_name: '1.0.8',
         template_variable: {
           repo,
           eventType,
@@ -61,7 +64,8 @@ export function BuildGithubNotificationCard(
           avatar: 'img_v2_9dd98485-2900-4d65-ada9-e31d1408dcfg',
           status,
           etitle,
-          detailurl
+          detailurl,
+          ...data
         }
       }
     }
