@@ -43914,11 +43914,17 @@ async function PostGithubEvent() {
         data = core.getInput('template_data')
             ? core.getInput('template_data')
             : process.env.TEMPLATE_DATA;
+        console.log('template_data', data);
         data = data ? JSON.parse(data) : {};
     }
     catch (err) {
         data = {};
         console.log('get data err', err);
+        console.error('JSON 解析失败:', err.message);
+        console.error('错误堆栈:', err.stack);
+        console.error('失败的原始数据:', core.getInput('template_data'));
+        data = {};
+        core.setFailed(`解析 template_data 失败: ${err.message}\n 失败数据：\n ${core.getInput('template_data')} \n`);
     }
     const payload = github_1.context.payload || {};
     console.log(payload);
