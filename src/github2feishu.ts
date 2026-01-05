@@ -196,6 +196,9 @@ export async function PostGithubEvent(): Promise<number | undefined> {
   }
 
   const color = 'blue'
+  console.log('build data:\n')
+  console.log(data)
+
   const cardmsg = BuildGithubNotificationCard(
     tm,
     sign,

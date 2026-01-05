@@ -44062,6 +44062,8 @@ async function PostGithubEvent() {
             break;
     }
     const color = 'blue';
+    console.log('build data:\n');
+    console.log(data);
     const cardmsg = (0, card_1.BuildGithubNotificationCard)(tm, sign, repo, eventType, color, actor, status, etitle, detailurl, templateId, data);
     return (0, feishu_1.PostToFeishu)(webhookId, cardmsg);
 }
