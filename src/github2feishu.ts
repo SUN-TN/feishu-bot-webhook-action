@@ -33,6 +33,7 @@ export async function PostGithubEvent(): Promise<number | undefined> {
       : process.env.TEMPLATE_DATA
 
     console.log('template_data', data)
+    console.log('template_data.preview_img\n', data.preview_img)
 
     data = data ? JSON.parse(data) : {}
   } catch (err: any) {

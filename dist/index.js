@@ -43915,6 +43915,7 @@ async function PostGithubEvent() {
             ? core.getInput('template_data')
             : process.env.TEMPLATE_DATA;
         console.log('template_data', data);
+        console.log('template_data.preview_img\n', data.preview_img);
         data = data ? JSON.parse(data) : {};
     }
     catch (err) {
