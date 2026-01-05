@@ -31,10 +31,23 @@ export async function PostGithubEvent(): Promise<number | undefined> {
     data = core.getInput('template_data')
       ? core.getInput('template_data')
       : process.env.TEMPLATE_DATA
+
+    console.log('template_data', data)
+
     data = data ? JSON.parse(data) : {}
-  } catch (err) {
+  } catch (err: any) {
     data = {}
     console.log('get data err', err)
+
+    // 打印详细错误（包括位置、原始内容）
+    console.error('JSON 解析失败:', err.message)
+    console.error('错误堆栈:', err.stack)
+    console.error('失败的原始数据:', core.getInput('template_data'))
+    data = {}
+    // 可选：抛出错误终止 Actions（根据需求决定）
+    core.setFailed(
+      `解析 template_data 失败: ${err.message}\n 失败数据：\n ${core.getInput('template_data')} \n`
+    )
   }
 
   const payload = context.payload || {}
